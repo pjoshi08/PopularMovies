@@ -1,0 +1,36 @@
+<resources>
+    <string name="app_name">Popular Movies</string>
+
+    <!-- Home Activity Header -->
+    <string name="home_activity_header">Movies</string>
+
+
+
+    <!-- Poster base URL, 500 width -->
+    <string name="poster_base_url_500w">https://image.tmdb.org/t/p/w500</string>
+
+    <!-- filter strings -->
+    <string name="filter_label">Apply Filter</string>
+    <string name="filter_popular">popular</string>
+    <string name="filter_top_rated">top_rated</string>
+    <string name="filter_chip_popular">By Popularity</string>
+    <string name="filter_chip_rated">By Rating</string>
+
+    <!-- Intent extra -->
+    <string name="movie_id">movie_id</string>
+
+    <!-- Label for Movie Detail Screen -->
+    <string name="label_release_date">Release Date:</string>
+    <string name="label_vote_avg">Rating:</string>
+    <string name="label_synopsis">Synopsis:</string>
+    <string name="vote_avg_text_add">/10</string>
+
+    <!-- Movie Detail Intent Extra Key -->
+    <string name="parcelable_movie_key">movie_details</string>
+
+    <!-- Keys for MainActivity SavedInstanceState -->
+    <string name="img_list_key">image_list</string>
+    <string name="applied_filter_key">applied_filter</string>
+    <string name="movie_data_list_key">movie_data_list</string>
+
+</resources>

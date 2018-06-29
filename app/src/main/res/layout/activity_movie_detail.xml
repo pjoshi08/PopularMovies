@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.DetailActivity">
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/lottieAnimationView"
+            android:layout_width="@dimen/anim_dimen"
+            android:layout_height="@dimen/anim_dimen"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:lottie_fileName="movie_loading.json" />
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/movie_detail_group"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/iv_poster"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/poster_horizontal_margin"
+                android:layout_marginTop="@dimen/poster_vertical_margin"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintRight_toRightOf="parent"/>
+
+            <TextView
+                android:id="@+id/tv_title"
+                android:layout_width="@dimen/title_layout_width"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="@id/iv_poster"
+                app:layout_constraintLeft_toLeftOf="parent"
+                android:layout_marginStart="@dimen/title_horizontal_margin"
+                android:textColor="@color/colorPrimaryLight"
+                android:textSize="@dimen/movie_detail_label"
+                android:textStyle="bold"
+                tools:text="Star Wars" />
+
+            <TextView
+                android:id="@+id/label_release_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/label_release_date_vertical"
+                android:text="@string/label_release_date"
+                android:textColor="@color/colorPrimaryLight"
+                android:textSize="@dimen/movie_detail_label"
+                android:textStyle="bold"
+                app:layout_constraintLeft_toLeftOf="@id/tv_title"
+                app:layout_constraintTop_toBottomOf="@id/tv_title" />
+
+            <TextView
+                android:id="@+id/tv_release_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/tv_release_date"
+                android:textColor="@color/colorPrimaryLight"
+                android:textSize="@dimen/movie_detail_text"
+                app:layout_constraintLeft_toLeftOf="@id/tv_title"
+                app:layout_constraintTop_toBottomOf="@id/label_release_date"
+                tools:text="2018" />
+
+            <TextView
+                android:id="@+id/label_vote_avg"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/label_vote_avg_vertical"
+                android:text="@string/label_vote_avg"
+                android:textColor="@color/colorPrimaryLight"
+                android:textSize="@dimen/movie_detail_label"
+                android:textStyle="bold"
+                app:layout_constraintLeft_toLeftOf="@id/tv_release_date"
+                app:layout_constraintTop_toBottomOf="@id/tv_release_date" />
+
+            <TextView
+                android:id="@+id/tv_vote_avg"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/tv_release_date"
+                android:textColor="@color/colorPrimaryLight"
+                android:textSize="@dimen/movie_detail_text"
+                app:layout_constraintLeft_toLeftOf="@id/tv_release_date"
+                app:layout_constraintTop_toBottomOf="@id/label_vote_avg"
+                tools:text="8.4" />
+
+            <TextView
+                android:id="@+id/label_synopsis"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/label_synopsis_horizontal"
+                android:layout_marginTop="@dimen/label_synopsis_vertical"
+                android:text="@string/label_synopsis"
+                android:textColor="@color/colorPrimaryLight"
+                android:textSize="@dimen/movie_detail_label"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@id/tv_vote_avg"
+                app:layout_constraintTop_toBottomOf="@id/iv_poster" />
+
+            <TextView
+                android:id="@+id/tv_synopsis"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/tv_synopsis_horizontal"
+                android:layout_marginStart="@dimen/tv_synopsis_horizontal"
+                android:layout_marginTop="@dimen/tv_synopsis_top"
+                android:textColor="@color/colorPrimaryLight"
+                android:textSize="@dimen/movie_detail_text"
+                app:layout_constraintLeft_toLeftOf="@id/tv_vote_avg"
+                app:layout_constraintTop_toBottomOf="@id/label_synopsis"
+                tools:text="Synopsis" />
+
+        </android.support.constraint.ConstraintLayout>
+</android.support.constraint.ConstraintLayout>

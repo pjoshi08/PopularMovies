@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="movie_detail_label">20sp</dimen>
+    <dimen name="movie_detail_text">16sp</dimen>
+
+    <!-- Detail Activity dimensions -->
+    <dimen name="poster_horizontal_margin">16dp</dimen>
+    <dimen name="poster_vertical_margin">32dp</dimen>
+    <dimen name="title_layout_width">180dp</dimen>
+    <dimen name="title_horizontal_margin">16dp</dimen>
+    <dimen name="label_release_date_vertical">32dp</dimen>
+    <dimen name="tv_release_date">8dp</dimen>
+    <dimen name="label_vote_avg_vertical">32dp</dimen>
+    <dimen name="label_synopsis_horizontal">16dp</dimen>
+    <dimen name="label_synopsis_vertical">32dp</dimen>
+    <dimen name="tv_synopsis_horizontal">16dp</dimen>
+    <dimen name="tv_synopsis_top">8dp</dimen>
+    <dimen name="tv_synopsis_bottom">16dp</dimen>
+
+    <!-- LottieAnimation Layout Dimensions -->
+    <dimen name="anim_dimen">56dp</dimen>
+
+    <!-- Filter Dimensions -->
+    <dimen name="filter_layout_height">300dp</dimen>
+    <dimen name="filter_label_vertical">10dp</dimen>
+    <dimen name="filter_chip_height">40dp</dimen>
+    <dimen name="filter_chip_margin_padding">16dp</dimen>
+    <dimen name="chip_text_size">14sp</dimen>
+    <dimen name="filter_btn_height">56dp</dimen>
+    <dimen name="filter_btn_group_padding">8dp</dimen>
+    <dimen name="filter_btn_width">0dp</dimen>
+    <dimen name="filter_btn_horizontal">4dp</dimen>
+    <dimen name="filter_btn_elevation">8dp</dimen>
+
+    <!-- MainActivity Dimensions -->
+    <dimen name="header_margin">16dp</dimen>
+    <dimen name="floating_btn_top_margin">-30dp</dimen>
+    <dimen name="floating_btn_margin_end">16dp</dimen>
+
+</resources>
