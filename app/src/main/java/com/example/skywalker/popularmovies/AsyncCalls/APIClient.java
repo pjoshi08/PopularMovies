@@ -1,4 +1,4 @@
-package com.example.skywalker.popularmovies.Util;
+package com.example.skywalker.popularmovies.AsyncCalls;
 
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;

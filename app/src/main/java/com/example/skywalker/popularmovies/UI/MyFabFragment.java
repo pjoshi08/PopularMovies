@@ -1,4 +1,4 @@
-package com.example.skywalker.popularmovies.ui;
+package com.example.skywalker.popularmovies.UI;
 
 import android.app.Dialog;
 import android.os.Bundle;
@@ -10,9 +10,19 @@ import android.widget.TextView;
 import com.allattentionhere.fabulousfilter.AAH_FabulousFragment;
 import com.example.skywalker.popularmovies.R;
 
+import butterknife.BindString;
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class MyFabFragment extends AAH_FabulousFragment {
+
+    @BindView(R.id.filter_popular) TextView tvPopular;
+    @BindView(R.id.filter_rating) TextView tvRated;
+
+    @BindString(R.string.filter_popular) String filterPopular;
+    @BindString(R.string.filter_top_rated) String filterRated;
+
     private String applied_filter;
-    private TextView tvPopular, tvRated;
 
     public static MyFabFragment newInstance() {
         return new MyFabFragment();
@@ -23,8 +33,9 @@ public class MyFabFragment extends AAH_FabulousFragment {
         super.onCreate(savedInstanceState);
         try {
             applied_filter = ((MainActivity) getActivity()).getApplied_filter();
-        } catch (Exception e){
-            e.printStackTrace();
+            if(applied_filter == null) applied_filter = filterPopular;
+        } catch (NullPointerException npe){
+            npe.printStackTrace();
         }
     }
 
@@ -40,15 +51,14 @@ public class MyFabFragment extends AAH_FabulousFragment {
             }
         });
 
-        tvPopular = contentView.findViewById(R.id.filter_popular);
-        tvRated = contentView.findViewById(R.id.filter_rating);
+        ButterKnife.bind(this, contentView);
 
-        setFilterBackground(applied_filter);
+        setFilterBackground();
 
         tvPopular.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                applied_filter = "popular";
+                applied_filter = filterPopular;
                 filterHandle(v);
             }
         });
@@ -56,7 +66,7 @@ public class MyFabFragment extends AAH_FabulousFragment {
         tvRated.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                applied_filter = "top_rated";
+                applied_filter = filterRated;
                 filterHandle(v);
             }
         });
@@ -92,14 +102,10 @@ public class MyFabFragment extends AAH_FabulousFragment {
         }
     }
 
-    private void setFilterBackground(String s){
-        switch (s){
-            case "popular":
-                tvPopular.setBackgroundResource(R.drawable.chip_selected);
-                break;
-            case "top_rated":
-                tvRated.setBackgroundResource(R.drawable.chip_selected);
-                break;
-        }
+    private void setFilterBackground(){
+        if(filterPopular.equals(applied_filter))
+            tvPopular.setBackgroundResource(R.drawable.chip_selected);
+        else if(filterRated.equals(applied_filter))
+            tvRated.setBackgroundResource(R.drawable.chip_selected);
     }
 }

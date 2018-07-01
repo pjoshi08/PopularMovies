@@ -4,10 +4,10 @@
     <!-- Home Activity Header -->
     <string name="home_activity_header">Movies</string>
 
-
-
     <!-- Poster base URL, 500 width -->
-    <string name="poster_base_url_500w">https://image.tmdb.org/t/p/w500</string>
+    <string name="poster_scheme">https</string>
+    <string name="poster_authority">image.tmdb.org</string>
+    <string name="append_path_list">t/p/w500</string>
 
     <!-- filter strings -->
     <string name="filter_label">Apply Filter</string>

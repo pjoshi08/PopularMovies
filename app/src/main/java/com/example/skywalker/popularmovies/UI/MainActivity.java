@@ -1,4 +1,4 @@
-package com.example.skywalker.popularmovies.ui;
+package com.example.skywalker.popularmovies.UI;
 
 import android.animation.ValueAnimator;
 import android.content.Intent;
@@ -15,9 +15,9 @@ import com.allattentionhere.fabulousfilter.AAH_FabulousFragment;
 import com.example.skywalker.popularmovies.BuildConfig;
 import com.example.skywalker.popularmovies.Model.MovieList;
 import com.example.skywalker.popularmovies.R;
-import com.example.skywalker.popularmovies.Util.APIClient;
-import com.example.skywalker.popularmovies.Util.APIInterface;
-import com.example.skywalker.popularmovies.Util.ImageAdapter;
+import com.example.skywalker.popularmovies.AsyncCalls.APIClient;
+import com.example.skywalker.popularmovies.AsyncCalls.APIInterface;
+import com.example.skywalker.popularmovies.Adapters.ImageAdapter;
 import java.util.ArrayList;
 
 import butterknife.BindString;
@@ -124,16 +124,17 @@ public class MainActivity extends AppCompatActivity implements AAH_FabulousFragm
             @Override
             public void onResponse(Call<MovieList> call, Response<MovieList> response) {
 
-                MovieList resource = response.body();
-
                 try {
-                    results = resource.results;
-                    for(MovieList.Movie movie : results) {
-                        images.add(movie.posterPath);
-                    }
+                    MovieList resource = response.body();
+                    if(resource != null) {
+                        results = resource.results;
+                        for (MovieList.Movie movie : results) {
+                            images.add(movie.posterPath);
+                        }
 
-                    imageAdapter.notifyDataSetChanged();
-                } catch (Exception e){
+                        imageAdapter.notifyDataSetChanged();
+                    }
+                } catch (NullPointerException e){
                     e.printStackTrace();
                 }
             }

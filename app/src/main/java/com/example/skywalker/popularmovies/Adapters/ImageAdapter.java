@@ -1,6 +1,8 @@
-package com.example.skywalker.popularmovies.Util;
+package com.example.skywalker.popularmovies.Adapters;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -12,6 +14,11 @@ import com.example.skywalker.popularmovies.R;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+
+import butterknife.BindDrawable;
+import butterknife.BindString;
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder> {
 
@@ -49,13 +56,16 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder> 
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
-        final String posterBaseURL500w = mContext.getResources()
-                .getString(R.string.poster_base_url_500w);
-        ImageView moviePoster;
+        @BindView(R.id.movie_poster) ImageView moviePoster;
+        @BindDrawable(R.drawable.placeholder) Drawable placeholder;
+        @BindDrawable(R.drawable.error) Drawable error;
+        @BindString(R.string.poster_scheme) String scheme;
+        @BindString(R.string.poster_authority) String authority;
+        @BindString(R.string.append_path_list) String appendEncodedPath;
 
         ViewHolder(View itemView) {
             super(itemView);
-            moviePoster = itemView.findViewById(R.id.movie_poster);
+            ButterKnife.bind(this, itemView);
             moviePoster.setAdjustViewBounds(true);
 
             itemView.setOnClickListener(this);
@@ -64,10 +74,19 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder> 
         void bind(int listIndex){
             //Load image into GridView with the help of Picasso
             Picasso.get()
-                    .load(posterBaseURL500w + mImages.get(listIndex))
-                    .placeholder(R.drawable.placeholder)
-                    .error(R.drawable.error)
+                    .load(buildUri(mImages.get(listIndex)))
+                    .placeholder(placeholder)
+                    .error(error)
                     .into(moviePoster);
+        }
+
+        private Uri buildUri(String path){
+            return new Uri.Builder()
+                    .scheme(scheme)
+                    .authority(authority)
+                    .appendEncodedPath(appendEncodedPath)
+                    .appendEncodedPath(path)
+                    .build();
         }
 
         @Override

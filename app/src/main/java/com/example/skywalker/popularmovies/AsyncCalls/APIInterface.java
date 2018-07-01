@@ -1,4 +1,4 @@
-package com.example.skywalker.popularmovies.Util;
+package com.example.skywalker.popularmovies.AsyncCalls;
 
 import com.example.skywalker.popularmovies.Model.MovieList;
 

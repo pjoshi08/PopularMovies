@@ -4,10 +4,11 @@
     <dimen name="movie_detail_text">16sp</dimen>
 
     <!-- Detail Activity dimensions -->
-    <dimen name="poster_horizontal_margin">16dp</dimen>
-    <dimen name="poster_vertical_margin">32dp</dimen>
-    <dimen name="title_layout_width">180dp</dimen>
-    <dimen name="title_horizontal_margin">16dp</dimen>
+    <dimen name="poster_horizontal_landscape">8dp</dimen>
+    <dimen name="poster_vertical_margin">16dp</dimen>
+    <dimen name="title_layout_width">156dp</dimen>
+    <dimen name="title_vertical_margin">16dp</dimen>
+    <dimen name="title_start_margin">16dp</dimen>
     <dimen name="label_release_date_vertical">32dp</dimen>
     <dimen name="tv_release_date">8dp</dimen>
     <dimen name="label_vote_avg_vertical">32dp</dimen>
