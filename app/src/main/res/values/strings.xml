@@ -1,11 +1,17 @@
 <resources>
     <string name="app_name">Popular Movies</string>
 
-    <!-- Home Activity Header -->
+    <string name="base_url">https://api.themoviedb.org/3/</string>
+    <string name="thumbnail_authority">img.youtube.com</string>
+    <string name="thumbnail_path1">vi</string>
+    <string name="thumbnail_path2">0.jpg</string>
+
+    <!-- MainActivity strings -->
     <string name="home_activity_header">Movies</string>
+    <string name="no_fav">No Movie added to favorites</string>
 
     <!-- Poster base URL, 500 width -->
-    <string name="poster_scheme">https</string>
+    <string name="uri_scheme">https</string>
     <string name="poster_authority">image.tmdb.org</string>
     <string name="append_path_list">t/p/w500</string>
 
@@ -13,24 +19,49 @@
     <string name="filter_label">Apply Filter</string>
     <string name="filter_popular">popular</string>
     <string name="filter_top_rated">top_rated</string>
+    <string name="filter_favorites">favorites</string>
     <string name="filter_chip_popular">By Popularity</string>
     <string name="filter_chip_rated">By Rating</string>
+    <string name="filter_chip_favorites">By Favorites</string>
 
-    <!-- Intent extra -->
-    <string name="movie_id">movie_id</string>
-
-    <!-- Label for Movie Detail Screen -->
+    <!-- Labels for Movie Detail Screen -->
     <string name="label_release_date">Release Date:</string>
     <string name="label_vote_avg">Rating:</string>
     <string name="label_synopsis">Synopsis:</string>
     <string name="vote_avg_text_add">/10</string>
+    <string name="add_to_fav">Movie added to favorites</string>
+    <string name="remove_from_fav">Removed from favorites</string>
+    <string name="no_trailers">No Trailers!</string>
+    <string name="label_trailers">Trailers:</string>
+    <string name="label_reviews">Reviews</string>
+    <string name="no_reviews">No Reviews Yet!</string>
+    <string name="btn_see_all">SEE ALL</string>
+    <string name="label_bookmark">Bookmark:</string>
 
-    <!-- Movie Detail Intent Extra Key -->
+    <!-- Reviews bundle key -->
+    <string name="reviews_bundle_key">reviews_bundle_key</string>
+
+    <!-- Keys for Detail Activity SavedInstanceState -->
     <string name="parcelable_movie_key">movie_details</string>
+    <string name="youtube_keys">youtube_keys</string>
 
     <!-- Keys for MainActivity SavedInstanceState -->
     <string name="img_list_key">image_list</string>
     <string name="applied_filter_key">applied_filter</string>
     <string name="movie_data_list_key">movie_data_list</string>
+
+    <!-- Video Intent Uris -->
+    <string name="app_uri">vnd.youtube:</string>
+    <string name="web_uri">http://www.youtube.com/watch?v=</string>
+
+    <!-- sample review -->
+    <string name="sample_review">_Ragnarok_ is a tough one to review completely without spoiler,
+        so I\'ll keep this brief:\r\n\r\n* I was bothered by a small number of things that
+        happened in this movie.\r\n* I was in love with a large number of things that happened
+        in this movie.\r\n* _Thor: Ragnarok_ is not the MCU\'s best movie.\r\n*
+        _Thor: Ragnarok_ is the MCU's most fun movie.\r\n* Can we **please** have a worldwide
+        ban on putting anything that happens in the third act of your movie, in said movie's
+        trailers?\r\nThank you for your time. 4 stars.\r\n\r\n\r\n_Final rating:★★★★ -
+        Very strong appeal. A personal favourite._</string>
 
 </resources>

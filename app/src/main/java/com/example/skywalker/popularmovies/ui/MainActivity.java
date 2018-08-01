@@ -1,4 +1,4 @@
-package com.example.skywalker.popularmovies.UI;
+package com.example.skywalker.popularmovies.ui;
 
 import android.animation.ValueAnimator;
 import android.content.Intent;
@@ -9,20 +9,26 @@ import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.TextView;
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.allattentionhere.fabulousfilter.AAH_FabulousFragment;
 import com.example.skywalker.popularmovies.BuildConfig;
-import com.example.skywalker.popularmovies.Model.MovieList;
+import com.example.skywalker.popularmovies.db.MovieDB;
+import com.example.skywalker.popularmovies.model.MovieList;
 import com.example.skywalker.popularmovies.R;
-import com.example.skywalker.popularmovies.AsyncCalls.APIClient;
-import com.example.skywalker.popularmovies.AsyncCalls.APIInterface;
-import com.example.skywalker.popularmovies.Adapters.ImageAdapter;
+import com.example.skywalker.popularmovies.asynccalls.APIInterface;
+import com.example.skywalker.popularmovies.adapters.ImageAdapter;
+import com.example.skywalker.popularmovies.viewmodel.MainViewModel;
+
 import java.util.ArrayList;
+
+import javax.inject.Inject;
 
 import butterknife.BindString;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import dagger.android.AndroidInjection;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -34,54 +40,52 @@ public class MainActivity extends AppCompatActivity implements AAH_FabulousFragm
     @BindView(R.id.fab) FloatingActionButton fab;
     @BindView(R.id.recycler_view) RecyclerView recyclerView;
     @BindView(R.id.lottieAnimationView) LottieAnimationView lottieAnimationView;
+    @BindView(R.id.no_favorites_tv) TextView tvNoFav;
 
     // Binding of resources
     @BindString(R.string.filter_popular) String filter_popular;
     @BindString(R.string.filter_top_rated) String filter_top_rated;
+    @BindString(R.string.filter_favorites) String filter_favorites;
     @BindString(R.string.parcelable_movie_key) String movieDetailsKey;
     @BindString(R.string.img_list_key) String imageListKey;
     @BindString(R.string.applied_filter_key) String appliedFilterKey;
     @BindString(R.string.movie_data_list_key) String movieDataList;
 
-    private ArrayList<MovieList.Movie> results;
-    private ArrayList<String> images;
-    private APIInterface apiInterface;
+    // DI
+    @Inject ArrayList<MovieList.Movie> results;
+    @Inject ArrayList<String> images;
+    @Inject APIInterface apiInterface;
     private String applied_filter;
-    private ImageAdapter imageAdapter;
+    @Inject ImageAdapter imageAdapter;
     private final Long loadingIndicatorDuration = 2000L;
+    @Inject GridLayoutManager gridLayoutManager;
+    @Inject Intent movieDetailIntent;
+    @Inject MovieDB db;
+    @Inject MainViewModel vm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        AndroidInjection.inject(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         ButterKnife.bind(this);
 
-        images = new ArrayList<>();
-        results = new ArrayList<>();
-
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                MyFabFragment dialogFrag = MyFabFragment.newInstance();
-                dialogFrag.setParentFab(fab);
-                dialogFrag.show(getSupportFragmentManager(), dialogFrag.getTag());
-            }
+        fab.setOnClickListener(v -> {
+            MyFabFragment dialogFrag = MyFabFragment.newInstance();
+            dialogFrag.setParentFab(fab);
+            dialogFrag.show(getSupportFragmentManager(), dialogFrag.getTag());
         });
 
-        apiInterface = APIClient.getClient().create(APIInterface.class);
-
-        recyclerView.setLayoutManager(new GridLayoutManager(getBaseContext(), 2));
-        imageAdapter = new ImageAdapter(this, images, this);
+        recyclerView.setLayoutManager(gridLayoutManager);
         recyclerView.setAdapter(imageAdapter);
 
         if(savedInstanceState != null){
             results = savedInstanceState.getParcelableArrayList(movieDataList);
             applied_filter = savedInstanceState.getString(appliedFilterKey);
             images = savedInstanceState.getStringArrayList(imageListKey);
-            imageAdapter = new ImageAdapter(this, images, this);
-            recyclerView.setAdapter(imageAdapter);
-            showLoadingIndicator();
+            imageAdapter.setImages(images);
+            showMovieDetails();
             return;
         }
 
@@ -113,11 +117,13 @@ public class MainActivity extends AppCompatActivity implements AAH_FabulousFragm
             getMovies(filter_popular);
         } else if(result.toString().equalsIgnoreCase(filter_top_rated)) {
             getMovies(filter_top_rated);
+        } else if(result.toString().equalsIgnoreCase(filter_favorites)) {
+            getFavorites();
         }
     }
 
     private void getMovies(String sortValue){
-        images.clear();
+        getMoviesViewHandle();
         Call<MovieList> call = apiInterface.getMovies(sortValue, BuildConfig.API_KEY);
 
         call.enqueue(new Callback<MovieList>() {
@@ -132,7 +138,7 @@ public class MainActivity extends AppCompatActivity implements AAH_FabulousFragm
                             images.add(movie.posterPath);
                         }
 
-                        imageAdapter.notifyDataSetChanged();
+                        imageAdapter.setImages(images);
                     }
                 } catch (NullPointerException e){
                     e.printStackTrace();
@@ -148,7 +154,6 @@ public class MainActivity extends AppCompatActivity implements AAH_FabulousFragm
 
     @Override
     public void onItemClick(int clickedItemIndex) {
-        Intent movieDetailIntent = new Intent(this, DetailActivity.class);
 
         MovieList.Movie movie = results.get(clickedItemIndex);
         movieDetailIntent.putExtra(movieDetailsKey, movie);
@@ -161,12 +166,7 @@ public class MainActivity extends AppCompatActivity implements AAH_FabulousFragm
         recyclerView.setVisibility(View.INVISIBLE);
         lottieAnimationView.setVisibility(View.VISIBLE);
         startLottieAnimation();
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                showMovieDetails();
-            }
-        }, loadingIndicatorDuration);
+        new Handler().postDelayed(this::showMovieDetails, loadingIndicatorDuration);
     }
 
     private void showMovieDetails() {
@@ -176,12 +176,7 @@ public class MainActivity extends AppCompatActivity implements AAH_FabulousFragm
 
     private void startLottieAnimation() {
         ValueAnimator animator = ValueAnimator.ofFloat(0f, 1f).setDuration(loadingIndicatorDuration);
-        animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-            @Override
-            public void onAnimationUpdate(ValueAnimator valueAnimator) {
-                lottieAnimationView.setProgress((Float) valueAnimator.getAnimatedValue());
-            }
-        });
+        animator.addUpdateListener(valueAnimator -> lottieAnimationView.setProgress((Float) valueAnimator.getAnimatedValue()));
 
         if (lottieAnimationView.getProgress() == 0f) {
             animator.start();
@@ -196,5 +191,33 @@ public class MainActivity extends AppCompatActivity implements AAH_FabulousFragm
         outState.putStringArrayList(imageListKey, images);
         outState.putString(appliedFilterKey, applied_filter);
         outState.putParcelableArrayList(movieDataList, results);
+    }
+
+    private void getFavorites(){
+
+        vm.getMovies().observe(this, movies1 -> {
+            if(movies1 != null) {
+                if (movies1.size() == 0) {
+                    recyclerView.setVisibility(View.GONE);
+                    tvNoFav.setVisibility(View.VISIBLE);
+                } else {
+                    images.clear();
+                    results.clear();
+
+                    for (MovieList.Movie movie : movies1) {
+                        images.add(movie.posterPath);
+                        results.add(movie);
+                    }
+
+                    imageAdapter.setImages(images);
+                }
+            }
+        });
+    }
+
+    private void getMoviesViewHandle(){
+        images.clear();
+        recyclerView.setVisibility(View.VISIBLE);
+        tvNoFav.setVisibility(View.GONE);
     }
 }

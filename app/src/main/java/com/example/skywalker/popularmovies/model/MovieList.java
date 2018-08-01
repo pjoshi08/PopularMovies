@@ -1,7 +1,11 @@
-package com.example.skywalker.popularmovies.Model;
+package com.example.skywalker.popularmovies.model;
 
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.Ignore;
+import android.arch.persistence.room.PrimaryKey;
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.support.annotation.NonNull;
 
 import com.google.gson.annotations.SerializedName;
 
@@ -12,6 +16,7 @@ public class MovieList {
     @SerializedName("results")
     public ArrayList<Movie> results = null;
 
+    @Entity(tableName = "favorites")
     public static class Movie implements Parcelable {
 
         @SerializedName("title")
@@ -29,12 +34,21 @@ public class MovieList {
         @SerializedName("overview")
         public String plotSynopsis;
 
+        @PrimaryKey
+        @SerializedName("id")
+        @NonNull
+        public String movieId;
+
+        public Movie(){}
+
+        @Ignore
         private Movie(Parcel in) {
             movieTitle = in.readString();
             releaseDate = in.readString();
             posterPath = in.readString();
             voteAvg = in.readString();
             plotSynopsis = in.readString();
+            movieId = in.readString();
         }
 
         public static final Creator<Movie> CREATOR = new Creator<Movie>() {
@@ -61,6 +75,7 @@ public class MovieList {
             dest.writeString(posterPath);
             dest.writeString(voteAvg);
             dest.writeString(plotSynopsis);
+            dest.writeString(movieId);
         }
     }
 }

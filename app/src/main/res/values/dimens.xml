@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="movie_detail_label">20sp</dimen>
-    <dimen name="movie_detail_text">16sp</dimen>
+    <dimen name="movie_detail_label">16sp</dimen>
+    <dimen name="movie_detail_text">14sp</dimen>
 
     <!-- Detail Activity dimensions -->
     <dimen name="poster_horizontal_landscape">8dp</dimen>
@@ -9,14 +9,15 @@
     <dimen name="title_layout_width">156dp</dimen>
     <dimen name="title_vertical_margin">16dp</dimen>
     <dimen name="title_start_margin">16dp</dimen>
-    <dimen name="label_release_date_vertical">32dp</dimen>
     <dimen name="tv_release_date">8dp</dimen>
-    <dimen name="label_vote_avg_vertical">32dp</dimen>
-    <dimen name="label_synopsis_horizontal">16dp</dimen>
-    <dimen name="label_synopsis_vertical">32dp</dimen>
     <dimen name="tv_synopsis_horizontal">16dp</dimen>
     <dimen name="tv_synopsis_top">8dp</dimen>
-    <dimen name="tv_synopsis_bottom">16dp</dimen>
+    <dimen name="divider_vertical">16dp</dimen>
+    <dimen name="ic_bookmark_horizontal">8dp</dimen>
+    <dimen name="divider_horizontal">8dp</dimen>
+    <dimen name="scrollbar_size">4dp</dimen>
+    <dimen name="ic_review_margin">8dp</dimen>
+    <dimen name="label_review_horizontal">8dp</dimen>
 
     <!-- LottieAnimation Layout Dimensions -->
     <dimen name="anim_dimen">56dp</dimen>
@@ -37,5 +38,21 @@
     <dimen name="header_margin">16dp</dimen>
     <dimen name="floating_btn_top_margin">-30dp</dimen>
     <dimen name="floating_btn_margin_end">16dp</dimen>
+
+    <!-- Review Activity Dimensions -->
+    <dimen name="header_vert">10dp</dimen>
+    <dimen name="review_list_vert">8dp</dimen>
+    <dimen name="ic_review_close">4dp</dimen>
+
+    <!-- review item dimensions -->
+    <dimen name="card_margin">4dp</dimen>
+    <dimen name="card_elevation">8dp</dimen>
+    <dimen name="card_radius">8dp</dimen>
+    <dimen name="author_margin">8dp</dimen>
+    <dimen name="divider_margin">8dp</dimen>
+    <dimen name="review_margin">8dp</dimen>
+
+    <!-- video item dimensions -->
+    <dimen name="thumbnail_horizontal">8dp</dimen>
 
 </resources>

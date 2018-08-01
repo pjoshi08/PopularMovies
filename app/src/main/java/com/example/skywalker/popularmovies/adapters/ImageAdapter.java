@@ -1,4 +1,4 @@
-package com.example.skywalker.popularmovies.Adapters;
+package com.example.skywalker.popularmovies.adapters;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -15,6 +15,8 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
+import javax.inject.Inject;
+
 import butterknife.BindDrawable;
 import butterknife.BindString;
 import butterknife.BindView;
@@ -30,16 +32,21 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder> 
         void onItemClick(int clickedItemIndex);
     }
 
-    public ImageAdapter(Context context, ArrayList<String> images, OnItemClickListener listener) {
+    @Inject
+    public ImageAdapter(Context context, OnItemClickListener listener) {
         mContext = context;
-        mImages = images;
         mOnItemClickListener = listener;
+    }
+
+    public void setImages(ArrayList<String> images){
+        mImages = images;
+        notifyDataSetChanged();
     }
 
     @NonNull
     @Override
     public ImageAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(mContext).inflate(R.layout.image_item,
+            View view = LayoutInflater.from(mContext).inflate(R.layout.image_item,
                 parent, false);
         return new ViewHolder(view);
     }
@@ -51,6 +58,9 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder> 
 
     @Override
     public int getItemCount() {
+        if (mImages == null) {
+            return 0;
+        }
         return mImages.size();
     }
 
@@ -59,7 +69,7 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder> 
         @BindView(R.id.movie_poster) ImageView moviePoster;
         @BindDrawable(R.drawable.placeholder) Drawable placeholder;
         @BindDrawable(R.drawable.error) Drawable error;
-        @BindString(R.string.poster_scheme) String scheme;
+        @BindString(R.string.uri_scheme) String scheme;
         @BindString(R.string.poster_authority) String authority;
         @BindString(R.string.append_path_list) String appendEncodedPath;
 

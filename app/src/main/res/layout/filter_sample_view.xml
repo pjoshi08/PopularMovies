@@ -62,6 +62,23 @@
             android:textColor="@color/primary_text"
             android:textSize="@dimen/chip_text_size" />
 
+        <TextView
+            android:id="@+id/filter_favorites"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/filter_chip_height"
+            android:layout_below="@id/filter_rating"
+            android:layout_marginTop="@dimen/filter_chip_margin_padding"
+            android:layout_marginStart="@dimen/filter_chip_margin_padding"
+            android:background="@drawable/chip_unselected"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center"
+            android:paddingLeft="@dimen/filter_chip_margin_padding"
+            android:paddingRight="@dimen/filter_chip_margin_padding"
+            android:text="@string/filter_chip_favorites"
+            android:textColor="@color/primary_text"
+            android:textSize="@dimen/chip_text_size" />
+
         <LinearLayout
             android:id="@+id/ll_buttons"
             android:layout_width="match_parent"
