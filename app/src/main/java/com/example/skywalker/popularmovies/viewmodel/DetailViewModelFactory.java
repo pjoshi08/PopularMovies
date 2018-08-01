@@ -4,7 +4,7 @@ import android.arch.lifecycle.ViewModel;
 import android.arch.lifecycle.ViewModelProvider;
 import android.support.annotation.NonNull;
 
-import com.example.skywalker.popularmovies.db.MovieDB;
+import com.example.skywalker.popularmovies.model.MovieDB;
 
 public class DetailViewModelFactory extends ViewModelProvider.NewInstanceFactory {
 

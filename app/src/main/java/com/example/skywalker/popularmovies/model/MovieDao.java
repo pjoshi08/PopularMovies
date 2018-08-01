@@ -1,4 +1,4 @@
-package com.example.skywalker.popularmovies.db;
+package com.example.skywalker.popularmovies.model;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.persistence.room.Dao;

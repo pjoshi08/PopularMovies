@@ -4,7 +4,7 @@ import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.LiveData;
 import android.support.annotation.NonNull;
-import com.example.skywalker.popularmovies.db.MovieDB;
+import com.example.skywalker.popularmovies.model.MovieDB;
 import com.example.skywalker.popularmovies.model.MovieList;
 
 import java.util.List;

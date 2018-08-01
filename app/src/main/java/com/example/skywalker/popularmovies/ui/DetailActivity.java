@@ -21,7 +21,7 @@ import com.example.skywalker.popularmovies.BuildConfig;
 import com.example.skywalker.popularmovies.adapters.VideoAdapter;
 import com.example.skywalker.popularmovies.asynccalls.APIInterface;
 import com.example.skywalker.popularmovies.util.AppExecutors;
-import com.example.skywalker.popularmovies.db.MovieDB;
+import com.example.skywalker.popularmovies.model.MovieDB;
 import com.example.skywalker.popularmovies.model.MovieList;
 import com.example.skywalker.popularmovies.R;
 import com.example.skywalker.popularmovies.model.ReviewList;

@@ -2,7 +2,7 @@ package com.example.skywalker.popularmovies.viewmodel;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.ViewModel;
-import com.example.skywalker.popularmovies.db.MovieDB;
+import com.example.skywalker.popularmovies.model.MovieDB;
 import com.example.skywalker.popularmovies.model.MovieList;
 
 public class DetailViewModel extends ViewModel {

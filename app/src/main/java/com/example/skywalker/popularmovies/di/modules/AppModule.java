@@ -6,7 +6,7 @@ import android.content.Context;
 import com.example.skywalker.popularmovies.R;
 import com.example.skywalker.popularmovies.asynccalls.APIInterface;
 import com.example.skywalker.popularmovies.di.qualifiers.ApplicationContext;
-import com.example.skywalker.popularmovies.db.MovieDB;
+import com.example.skywalker.popularmovies.model.MovieDB;
 
 import javax.inject.Singleton;
 import dagger.Module;

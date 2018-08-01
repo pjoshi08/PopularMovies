@@ -1,11 +1,9 @@
-package com.example.skywalker.popularmovies.db;
+package com.example.skywalker.popularmovies.model;
 
 import android.arch.persistence.room.Database;
 import android.arch.persistence.room.Room;
 import android.arch.persistence.room.RoomDatabase;
 import android.content.Context;
-
-import com.example.skywalker.popularmovies.model.MovieList;
 
 @Database(entities = MovieList.Movie.class, version = 1, exportSchema = false)
 public abstract class MovieDB extends RoomDatabase{
